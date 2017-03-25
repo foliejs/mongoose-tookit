@@ -1,14 +1,36 @@
 const express = require('express')
 const router = express.Router()
 
-// find user
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     description: find user
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: find success
+ */
 router.get('/', (req, res) => {
   db.User
     .find({})
     .then((result) => res.send(result))
 })
 
-// create user
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     description: create user
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *
+ */
 router.post('/', (req, res) => {
   let userModel = {
     name: 'cute-body',
@@ -21,7 +43,17 @@ router.post('/', (req, res) => {
     .catch(err => res.send(500, err))
 })
 
-// modify user
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     description: modify user
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ */
 router.put('/', (req, res) => {
   db.User
     .update({name: 'cute-body'}, {
@@ -34,7 +66,18 @@ router.put('/', (req, res) => {
     .catch(err => res.send(500, err))
 })
 
-// modify user
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     description: delete user
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: delete success
+ */
 router.delete('/', (req, res) => {
   db.User
     .remove({name: 'cute-body'})
