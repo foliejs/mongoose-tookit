@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const swaggerJSDoc = require('swagger-jsdoc')
 
-// find user
 router.get('/doc', (req, res) => {
   let options = {
     swaggerDefinition: {
