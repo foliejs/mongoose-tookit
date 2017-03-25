@@ -13,6 +13,7 @@ express for cute boy
 - [x] [Express](https://github.com/expressjs/express)
 - [x] [EJS](https://github.com/tj/ejs)
 - [x] [Mongoose](https://github.com/Automattic/mongoose)
+- [x] [Swagger-Jsdoc](https://github.com/Surnet/swagger-jsdoc)
 
 
 ## Installation

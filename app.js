@@ -8,6 +8,7 @@ const db = require('./model/index')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const swagger = require('./routes/swagger')
 const session = require('express-session')
 
 const app = express()
@@ -35,6 +36,7 @@ app.use(session({
 
 app.use('/', index)
 app.use('/users', users)
+app.use('/swagger', swagger)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
