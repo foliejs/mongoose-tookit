@@ -4,7 +4,7 @@ const router = express.Router()
 /**
  * @swagger
  * /:
- *   post:
+ *   get:
  *     description: find user
  *     produces:
  *       - application/json
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 /**
  * @swagger
  * /:
- *   post:
+ *   put:
  *     description: modify user
  *     produces:
  *       - application/json
@@ -69,7 +69,7 @@ router.put('/', (req, res) => {
 /**
  * @swagger
  * /:
- *   post:
+ *   delete:
  *     description: delete user
  *     produces:
  *       - application/json
