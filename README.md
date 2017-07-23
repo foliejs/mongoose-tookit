@@ -9,6 +9,8 @@
 express for cute boy
 
 ### Contains
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/foliejs/mongoose-tookit.svg)](https://greenkeeper.io/)
 - [x] [Node.js](https://github.com/nodejs/node)
 - [x] [Express](https://github.com/expressjs/express)
 - [x] [EJS](https://github.com/tj/ejs)
