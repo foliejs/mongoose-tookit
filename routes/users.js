@@ -21,6 +21,57 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
+ * /people:
+ *   get:
+ *     description: find unique people
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: find success
+ */
+router.get('/people', (req, res) => {
+  db.User
+    .find({})
+    .populate({path: 'people', match: {'email.mail': 'demo@tb.com'}, options: {'email.$': 1}})
+    .then((result) => res.send(result))
+    .catch(e => console.error(e))
+})
+
+/**
+ * @swagger
+ * /people/array:
+ *   get:
+ *     description: find unique people email
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: find success
+ */
+router.get('/people/array', (req, res) => {
+  db.People.aggregate([
+    {$match: {'email.mail': 'demo1@tb.com', name: 'dell'}},
+    {
+      $project: {
+        email: {
+          $filter: {
+            input: '$email',
+            as: 'email',
+            cond: {$eq: ['$$email.mail', 'demo1@tb.com']}
+          }
+        },
+        name: 1
+      }
+    }])
+    .then((result) => res.send(result))
+    .catch(e => console.error(e))
+})
+
+/**
+ * @swagger
  * /:
  *   post:
  *     description: create user
@@ -32,13 +83,28 @@ router.get('/', (req, res) => {
  *
  */
 router.post('/', (req, res) => {
-  let userModel = {
-    name: 'cute-body',
+  const userModel = {
+    name: 'cute',
     password: 'ctf'
   }
-  let user = new db.User(userModel)
-  user
+  const peopleModel = {
+    name: 'people',
+    email: [{
+      address: '2',
+      mail: '2@qq.com'
+    }, {
+      address: '3',
+      mail: '2@qq.com'
+    }]
+  }
+  const people = new db.People(peopleModel)
+  people
     .save()
+    .then(peopleData => {
+      userModel.people = peopleData._id
+      const user = new db.User(userModel)
+      return user.save()
+    })
     .then(result => res.send(result))
     .catch(err => res.send(500, err))
 })
