@@ -3,14 +3,14 @@ const router = express.Router()
 const swaggerJSDoc = require('swagger-jsdoc')
 
 router.get('/doc', (req, res) => {
-  let options = {
+  const options = {
     swaggerDefinition: {
       info: {
         title: 'cute boy', // Title (required)
-        version: '1.0.0', // Version (required)
-      },
+        version: '1.0.0' // Version (required)
+      }
     },
-    apis: ['./users.js'], // Path to the API docs
+    apis: ['./users.js'] // Path to the API docs
   }
 
   // Initialize swagger-jsdoc -> returns validated swagger spec in json format
