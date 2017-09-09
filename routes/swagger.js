@@ -14,7 +14,7 @@ router.get('/doc', (req, res) => {
   }
 
   // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-  let swaggerSpec = swaggerJSDoc(options)
+  const swaggerSpec = swaggerJSDoc(options)
   res.send(swaggerSpec)
 })
 
