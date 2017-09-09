@@ -24,13 +24,13 @@ git clone git@github.com:foliejs/mongoose-tookit.git
 
 ## Install dependencies:
 ```bash
-npm install
+npm install OR yarn install
 ```
 
 ## Usage
 
 ```bash
-npm start
+npm start OR yarn start
 ```
 
 ### LICENSE
