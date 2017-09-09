@@ -18,7 +18,7 @@ express for cute boy
 
 ## Installation
 ```bash
-git clone https://github.com/foliejs/express-demo
+git clone git@github.com:foliejs/mongoose-tookit.git
 ```
 
 
