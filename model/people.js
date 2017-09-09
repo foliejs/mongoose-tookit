@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const peopleSchema = new Schema({
+module.exports = new Schema({
   name: { type: String, require: true },
   isDeleted: { type: Boolean, default: false },
   isCreated: { type: Date, default: Date.now() },
@@ -10,5 +10,3 @@ const peopleSchema = new Schema({
     mail: String
   }]
 })
-
-module.exports = peopleSchema
