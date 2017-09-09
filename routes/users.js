@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../model')
 
 /**
  * @swagger
@@ -70,6 +71,52 @@ router.get('/people/array', (req, res) => {
     .catch(e => console.error(e))
 })
 
+// Mongo Aggregate Demo
+router.get('/aggregate/link', (req, res) => {
+  db.User.aggregate([{
+    $lookup: { // 多表关联
+      from: 'peoples',
+      localField: 'people',
+      foreignField: '_id',
+      as: 'people'
+    }
+  }, {
+    $match: {   // 条件筛选
+      '$or': [
+        { 'people.name': 'rose_people' },
+        { 'people.email.mail': 'jack@qq.com' }
+      ]
+    }
+  }, {
+    $sort: { _id: -1 } // 是否排序
+  }, {
+    $skip: 1    // 是否分页
+  }, {
+    $limit: 5   // 返回条数限制
+  }, {
+    $project: { // 调整返回数据结构
+      name: 1,
+      age: 1
+    }
+  }, {
+    $group: {  // 数据分组求和
+      _id: null,
+      count: { $sum: 1 }
+    }
+  }])
+    .then((result) => res.send(result))
+    .catch(e => console.error(e))
+})
+
+router.get('/populate/link', (req, res) => {
+  console.log('user populate')
+  db.User
+  .find({}).populate('people')
+  .then(users => {
+    res.send(users)
+  })
+})
+
 /**
  * @swagger
  * /:
@@ -84,17 +131,18 @@ router.get('/people/array', (req, res) => {
  */
 router.post('/', (req, res) => {
   const userModel = {
-    name: 'cute',
-    password: 'ctf'
+    name: 'jack_02',
+    password: '456',
+    age: 2
   }
   const peopleModel = {
-    name: 'people',
+    name: 'jack_02_people',
     email: [{
-      address: '2',
-      mail: '2@qq.com'
+      address: 'jack_02 address 02',
+      mail: 'jack@qq.com'
     }, {
-      address: '3',
-      mail: '2@qq.com'
+      address: 'jack_02 address 02',
+      mail: 'jack@qq.com'
     }]
   }
   const people = new db.People(peopleModel)
@@ -153,4 +201,3 @@ router.delete('/', (req, res) => {
 })
 
 module.exports = router
-
