@@ -10,6 +10,9 @@ const swagger = require('./routes/swagger')
 const session = require('express-session')
 
 const app = express()
+const restc = require('restc');
+// for express
+app.use(restc.express());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
